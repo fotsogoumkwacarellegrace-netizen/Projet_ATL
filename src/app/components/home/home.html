@@ -1,0 +1,74 @@
+<h1>{{ title() }}</h1>
+
+<p>Âge : {{ age() }} ans</p>
+
+<p>Statut : {{ isVerified() }}</p>
+
+<p>{{ names() }}</p>
+
+<ul>
+  @for (name of names(); track name) {
+    <li>{{ name }}</li>
+  }
+</ul>
+
+<p>{{ product() }}</p>
+
+<pre>{{ product() | json }}</pre>
+
+<!-- Sans pipe (illisible) -->
+<p>{{ currentDate() }}</p>
+<!-- Résultat : Sun Jun 22 2026 14:30:45 GMT+0100 -->
+
+<!-- Avec pipe date -->
+<p>{{ currentDate() | date }}</p>
+<!-- Résultat : Jun 22, 2026 -->
+
+<!-- Avec un format -->
+<p>{{ currentDate() | date:'short' }}</p>
+<!-- Résultat : 6/22/26, 2:30 PM -->
+
+<p>{{ currentDate() | date:'medium' }}</p>
+<!-- Résultat : Jun 22, 2026, 2:30:45 PM -->
+
+<!-- Format personnalisé -->
+<p>{{ currentDate() | date:'dd/MM/yyyy' }}</p>
+<!-- Résultat : 22/06/2026 -->
+
+<p>{{ currentDate() | date:'HH:mm:ss' }}</p>
+<!-- Résultat : 14:30:45 -->
+
+
+<!-- Devise par défaut (USD) -->
+<p>{{ price() | currency }}</p>
+<!-- Résultat : $25,000.00 -->
+
+<!-- En FCFA (devise du Cameroun) -->
+<p>{{ price() | currency:'XAF' }}</p>
+<!-- Résultat : XAF 25,000.00 -->
+
+<!-- Avec symbole au lieu du code -->
+<p>{{ price() | currency:'XAF':'symbol' }}</p>
+<!-- Résultat : FCFA 25,000.00 -->
+
+<!-- En euros -->
+<p>{{ price() | currency:'EUR':'symbol' }}</p>
+<!-- Résultat : €25,000.00 -->
+
+
+<p>{{ 'Bonjour Le Monde' | uppercase }}</p>
+<!-- Résultat : BONJOUR LE MONDE -->
+
+<p>{{ 'BONJOUR' | lowercase }}</p>
+<!-- Résultat : bonjour -->
+
+<p>{{ title() | uppercase }}</p>
+<!-- Résultat : MY SHOP -->
+
+
+<!-- Date formatée + uppercase -->
+<p>{{ currentDate() | date:'long' | uppercase }}</p>
+<!-- Résultat : JUNE 22, 2026 AT 2:30:45 PM UTC -->
+<!-- Prix formaté en FCFA puis en majuscules (rare) -->
+<p>{{ price() | currency:'XAF':'symbol' | uppercase }}</p>
+<!-- Résultat : FCFA 25,000.00 -->

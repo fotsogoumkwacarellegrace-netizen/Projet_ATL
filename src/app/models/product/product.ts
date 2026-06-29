@@ -11,6 +11,10 @@ export interface Product{
   id: number;
   name: string;
   description: string;
-  price:number;
   image:string;
+  soldPrice: number;
+  regularPrice: number;
+  createdAt: Date;
+  updatedAt?: Date;          // Le ? = optionnel
+  categories: string[];      // Tableau de strings
 }

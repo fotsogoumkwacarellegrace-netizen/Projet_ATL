@@ -7,10 +7,12 @@
   position: sticky;
   top: 0;
   z-index: 2050 !important;
-  width: 100%;
+  width: 100vw;
+  margin: 0;
   left: 0;
   right: 0;
   box-sizing: border-box;
+  margin-left: calc(-50vw + 50%);
 }
 
 #logo{
