@@ -1,14 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
-import { ProductList } from "./components/product-list/product-list";
+import { Container } from './components/container/container';
+import { Product } from './models/product/product';
+
 @Component({
   selector: 'app-root',
-  imports: [Header, Footer, ProductList],
+  imports: [Header, Footer, Container],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('shop-app');
+
+  favoritesCount = signal(0);
+
+  onFavoriteAdded(product: Product) {
+    this.favoritesCount.update(count => count + 1);
+    console.log('Total favoris :', this.favoritesCount());
+  }
 }

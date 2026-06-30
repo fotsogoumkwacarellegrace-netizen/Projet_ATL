@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductItem } from '../product-item/product-item';
 import { Product } from '../../models/product/product';
-
+import { ModalProductView } from '../modal-product-view/modal-product-view';
+import { signal  } from '@angular/core';
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, ProductItem],
+  imports: [CommonModule, ProductItem, ModalProductView],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductList {
-  products: Product[] = [
+  products = signal<Product[]>([
     {
       id: 1, name: 'Robe de soirée',
       description: 'pour tout evenement en soirée,en soie',
@@ -18,12 +19,12 @@ export class ProductList {
       regularPrice: 28000,
       createdAt: new Date('2026-01-15'),
       categories: ['vêtement', 'femme', 'traditionnel'],
-      image: 'assets/images/products/j.jpeg'
+      image: 'images/products/j.jpeg'
     },
     {
       id: 2, name: 'Robe traditionnelle',
       description: 'Tissée à la main, motifs Bamiléké',
-      soldPrice: 220000,
+      soldPrice: 22000,
       regularPrice: 28000,
       createdAt: new Date('2026-02-10'),
       categories: ['accessoire', 'artisanat'],
@@ -84,7 +85,7 @@ export class ProductList {
       categories: ['accessoire', 'artisanat'],
       image: 'images/products/robert.jpg'
     },
-  ]
+  ])
 
   products1 = [
 { id: 1, name: 'Robe traditionnelle', price: 25000, image: '/...' },
@@ -99,6 +100,39 @@ export class ProductList {
   constructor() {
     console.log('Composant ProductList créé !');
     // Tout ce qui doit s'exécuter AU MOMENT de la création va ici
+  }
+
+  onProductClicked(product: Product) {
+    console.log('Produit cliqué :', product);
+    this.onDisplayProductViewModal(product);
+  }
+     // données J6
+
+  // État du modal
+  isDisplayModal = signal(false);
+  modalProduct = signal<Product | undefined>(undefined);
+
+  // Méthode appelée quand un produit est cliqué
+  onDisplayProductViewModal(product: Product) {
+    this.modalProduct.set(product);
+    this.isDisplayModal.set(true);
+  }
+
+  // Méthode appelée quand le modal demande à être fermé
+  onCloseModal() {
+    this.isDisplayModal.set(false);
+    this.modalProduct.set(undefined);
+  }
+
+  // ... état existant ...
+
+  // NOUVEAU output : retransmet vers App
+  favoriteAdded = output<Product>();
+
+  // Méthode appelée quand le modal ajoute aux favoris
+  onFavoriteAdded(product: Product) {
+    console.log('Favori ajouté :', product.name);
+    this.favoriteAdded.emit(product);
   }
 }
 

@@ -1,1 +1,5 @@
-
+<div class="product-card" (click)="onProductClick()">
+  <img [src]="product().image" [alt]="product().name" />
+  <h3>{{ product().name }}</h3>
+  <p>{{ product().soldPrice | number:'1.0-0' }} FCFA</p>
+</div>

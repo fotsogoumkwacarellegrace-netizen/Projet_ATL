@@ -1,0 +1,20 @@
+<div class="overlay" (click)="onCloseClick()"></div>
+
+<div class="container" role="dialog" aria-modal="true">
+  <div class="image">
+    <img [src]="product()?.image" [alt]="product()?.name" />
+  </div>
+
+  <div class="details">
+    <h2>{{ product()?.name }}</h2>
+    <p>{{ product()?.description }}</p>
+    <h4>{{ product()?.soldPrice | number:'1.0-0' }} FCFA</h4>
+    <h4 class="regular">{{ product()?.regularPrice | number:'1.0-0' }} FCFA</h4>
+    <p>Créé le {{ product()?.createdAt | date:'dd/MM/yyyy' }}</p>
+
+    <div class="actions">
+      <button class="btn btn-favorite" (click)="onAddToFavorites()">❤ Ajouter aux favoris</button>
+      <button class="btn btn-close" (click)="onCloseClick()">Fermer</button>
+    </div>
+  </div>
+</div>

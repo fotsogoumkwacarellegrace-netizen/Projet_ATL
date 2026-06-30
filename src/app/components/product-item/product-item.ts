@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Product } from '../../models/product/product';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { input, output } from '@angular/core';
+import { Product } from '../../models/product/product';
 
 @Component({
   selector: 'app-product-item',
@@ -9,5 +10,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-item.css',
 })
 export class ProductItem {
-  @Input() product!: Product;
+  product = input.required<Product>();
+  productClicked = output<Product>();
+  displayProductViewModal = output<Product>();
+
+  onProductClick(): void {
+    const selectedProduct = this.product();
+    if (selectedProduct) {
+      this.productClicked.emit(selectedProduct);
+      this.displayProductViewModal.emit(selectedProduct);
+    }
+  }
+
+  closeModal = output<void>();
+
+  onCloseClick(): void {
+    this.closeModal.emit();
+  }
 }
