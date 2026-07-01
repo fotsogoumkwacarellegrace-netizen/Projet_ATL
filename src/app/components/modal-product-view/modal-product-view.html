@@ -6,15 +6,24 @@
   </div>
 
   <div class="details">
-    <h2>{{ product()?.name }}</h2>
+    <div class="details-header">
+      <h2>{{ product()?.name }}</h2>
+    </div>
+
     <p>{{ product()?.description }}</p>
     <h4>{{ product()?.soldPrice | number:'1.0-0' }} FCFA</h4>
     <h4 class="regular">{{ product()?.regularPrice | number:'1.0-0' }} FCFA</h4>
     <p>Créé le {{ product()?.createdAt | date:'dd/MM/yyyy' }}</p>
 
     <div class="actions">
-      <button class="btn btn-favorite" (click)="onAddToFavorites()">❤ Ajouter aux favoris</button>
-      <button class="btn btn-close" (click)="onCloseClick()">Fermer</button>
+      <button class="btn btn-favorite" (click)="onAddToFavorites()">
+        <span class="btn-icon">❤</span>
+        <span>Ajouter aux favoris</span>
+      </button>
+      <button class="btn btn-close" (click)="onCloseClick()">
+        <span class="btn-icon">✕</span>
+        <span>Fermer</span>
+      </button>
     </div>
   </div>
 </div>
