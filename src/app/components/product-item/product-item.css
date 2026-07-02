@@ -1,5 +1,7 @@
 .product-card {
   width: 100%;
+  max-width: none;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -11,9 +13,16 @@
 
 .product-card img {
   width: 100%;
-  height: 140px;
+  height: auto;
+  max-height: 220px;
   object-fit: cover;
   border-radius: 0.5rem;
+}
+
+@media (max-width: 450px) {
+  .product-card {
+    width: 100%;
+  }
 }
 
 .product-card h3 {

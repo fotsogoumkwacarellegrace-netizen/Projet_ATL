@@ -10,6 +10,7 @@ import { Product } from '../../models/product/product';
 })
 export class ModalProductView {
   product = input<Product>();
+  isFavorite = input(false);
   close = output<void>();
   favoriteAdded = output<Product>();
 

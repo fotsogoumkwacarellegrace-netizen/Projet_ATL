@@ -11,14 +11,16 @@
     </div>
 
     <p>{{ product()?.description }}</p>
-    <h4>{{ product()?.soldPrice | number:'1.0-0' }} FCFA</h4>
-    <h4 class="regular">{{ product()?.regularPrice | number:'1.0-0' }} FCFA</h4>
+    <div class="prices">
+      <h4 class="new-price">{{ product()?.soldPrice | number:'1.0-0' }} FCFA</h4>
+      <h4 class="regular-price">{{ product()?.regularPrice | number:'1.0-0' }} FCFA</h4>
+    </div>
     <p>Créé le {{ product()?.createdAt | date:'dd/MM/yyyy' }}</p>
 
     <div class="actions">
-      <button class="btn btn-favorite" (click)="onAddToFavorites()">
+      <button class="btn btn-favorite" [class.disabled]="isFavorite()" [disabled]="isFavorite()" (click)="onAddToFavorites()">
         <span class="btn-icon">❤</span>
-        <span>Ajouter aux favoris</span>
+        <span>{{ isFavorite() ? 'Déjà favoris' : 'Ajouter aux favoris' }}</span>
       </button>
       <button class="btn btn-close" (click)="onCloseClick()">
         <span class="btn-icon">✕</span>

@@ -96,6 +96,10 @@ export class ProductList {
   trackByProductId(index: number, product: Product): number {
     return product.id;
   }
+
+  favorites = signal<Product[]>([]);
+  favoriteIds = new Set<number>();
+
   // Le constructor — la méthode de construction
   constructor() {
     console.log('Composant ProductList créé !');
@@ -124,14 +128,22 @@ export class ProductList {
     this.modalProduct.set(undefined);
   }
 
-  // ... état existant ...
+  isFavorite(product: Product | undefined): boolean {
+    return !!product && this.favoriteIds.has(product.id);
+  }
 
   // NOUVEAU output : retransmet vers App
   favoriteAdded = output<Product>();
 
   // Méthode appelée quand le modal ajoute aux favoris
   onFavoriteAdded(product: Product) {
-    console.log('Favori ajouté :', product.name);
+    if (this.favoriteIds.has(product.id)) {
+      console.log('Produit déjà en favoris :', product.name);
+      return;
+    }
+
+    this.favoriteIds.add(product.id);
+    this.favorites.update(list => [...list, product]);
     this.favoriteAdded.emit(product);
   }
 }

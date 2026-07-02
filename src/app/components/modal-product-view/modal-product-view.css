@@ -67,6 +67,31 @@
   margin-left: auto;
 }
 
+.prices {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.new-price {
+  margin: 0;
+  color: #d32f2f;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.regular-price {
+  margin: 0;
+  color: #8a8a8a;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: line-through;
+  text-decoration-color: #d32f2f;
+  text-decoration-thickness: 2px;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -84,6 +109,12 @@
   padding: 8px 12px;
   background: #fff;
   cursor: pointer;
+}
+
+.btn-favorite.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn-favorite,
@@ -146,6 +177,10 @@
 
   .btn-favorite {
     flex: 1.2 1 0;
+  }
+
+  .container {
+    width: 95vw;
   }
 
   .btn-close {

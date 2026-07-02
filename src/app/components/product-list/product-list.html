@@ -32,10 +32,33 @@
       </div>
     }
   </div>
+
+  @if (favorites().length > 0) {
+    <section class="favorites-section">
+      <h3 class="favorites-title">Produits favoris</h3>
+      <div class="favorites-grid">
+        @for(favorite of favorites(); track favorite.id) {
+          <article class="favorite-card">
+            <div class="favorite-image">
+              <img [src]="favorite.image" [alt]="favorite.name" />
+            </div>
+            <div class="favorite-content">
+              <h4>{{ favorite.name }}</h4>
+              <p class="favorite-description">{{ favorite.description }}</p>
+              <div class="favorite-price">
+                <span class="regular">{{ favorite.regularPrice | number:'1.0-0' }} FCFA</span>
+                <span class="sold">{{ favorite.soldPrice | number:'1.0-0' }} FCFA</span>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  }
 </div>
 
 @if (isDisplayModal() && modalProduct()) {
-  <app-modal-product-view [product]="modalProduct()" (close)="onCloseModal()" (favoriteAdded)="onFavoriteAdded($event)"/>
+  <app-modal-product-view [product]="modalProduct()" [isFavorite]="isFavorite(modalProduct())" (close)="onCloseModal()" (favoriteAdded)="onFavoriteAdded($event)"/>
 }
 
 
